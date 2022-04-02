@@ -1,0 +1,14 @@
+[features]
+seeds = false
+[programs.localnet]
+new_solar = "Fjk21FDQXLuYq4STKn3aF15KyGgTnmGkjxo6BqvAn4uq"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run mocha -t 1000000 tests/"
