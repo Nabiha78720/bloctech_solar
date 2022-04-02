@@ -1,4 +1,4 @@
-const TOKEN_PROGRAM_ID = require("@solana/spl-token");
+const { TOKEN_PROGRAM_ID } = require("@solana/spl-token");
 
 const anchor = require("@project-serum/anchor");
 const serumCmn = require("@project-serum/common");
@@ -18,10 +18,10 @@ describe("new_solar", () => {
 
   let mint = PublicKey.default;
   let vaultAuthority = PublicKey.default;
-  let ownerTokenAccount= PublicKey.default;
+  let ownerTokenAccount = PublicKey.default;
 
-  it("Setup Test State", async()=>{
-    const [_mint,_ownerTokenAccount] = await serumCmn.createMintAndVault(
+  it("Setup Test State", async () => {
+    const [_mint, _ownerTokenAccount] = await serumCmn.createMintAndVault(
       provider,
       new anchor.BN(1000000),
       provider.wallet.publicKey,
@@ -33,15 +33,13 @@ describe("new_solar", () => {
       program.programId
     );
 
-
     mint = _mint;
     vaultAuthority = _vaultAuthority;
-    ownerTokenAccount= _ownerTokenAccount;
-
+    ownerTokenAccount = _ownerTokenAccount;
   });
 
   it("Is initialized!", async () => {
-
+    console.log(TOKEN_PROGRAM_ID, "TOKEN_PROGRAM_ID");
     await program.rpc.initialize(
       new anchor.BN(1000),
       [
@@ -49,7 +47,6 @@ describe("new_solar", () => {
           apr: new anchor.BN(12),
           minAmount: new anchor.BN(321),
           duration: new anchor.BN(121),
-
         },
       ],
       {
@@ -63,14 +60,10 @@ describe("new_solar", () => {
           tokenProgram: TOKEN_PROGRAM_ID,
           rent: anchor.web3.SYSVAR_RENT_PUBKEY,
           systemProgram: anchor.web3.SystemProgram.programId,
-
         },
         signers: [initializeAccount, vaultAccount],
       }
     );
-
-
-
 
     const data = await program.account.initializeAccount.fetch(
       initializeAccount.publicKey
@@ -86,7 +79,5 @@ describe("new_solar", () => {
     // const program = anchor.workspace.NewSolar;
     // const tx = await program.rpc.initialize();
     // console.log("Your transaction signature", tx);
-
-    
   });
 });
