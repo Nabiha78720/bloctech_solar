@@ -1,4 +1,4 @@
-const TOKEN_PROGRAM_ID = require("@solana/spl-token");
+const {TOKEN_PROGRAM_ID} = require("@solana/spl-token");
 
 const anchor = require("@project-serum/anchor");
 const serumCmn = require("@project-serum/common");
@@ -49,7 +49,6 @@ describe("new_solar", () => {
           apr: new anchor.BN(12),
           minAmount: new anchor.BN(321),
           duration: new anchor.BN(121),
-
         },
       ],
       {
@@ -68,8 +67,6 @@ describe("new_solar", () => {
         signers: [initializeAccount, vaultAccount],
       }
     );
-
-
 
 
     const data = await program.account.initializeAccount.fetch(
